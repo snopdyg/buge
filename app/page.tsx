@@ -7,6 +7,7 @@ import Link from "next/link"
 
 export default function BugePage() {
   const [noteModalOpen, setNoteModalOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const heroRef = useRef<HTMLDivElement>(null)
   const dogRef = useRef<HTMLImageElement>(null)
@@ -113,8 +114,20 @@ export default function BugePage() {
         }}
       />
 
-      {/* Top Navigation */}
-      <div className="fixed top-5 right-5 flex gap-3 z-50">
+      {/* Mobile Menu Button */}
+      <div className="fixed top-4 right-4 z-[60] md:hidden">
+        <Button
+          variant="outline"
+          size="sm"
+          className="bg-white shadow-lg hover:shadow-xl transition-all"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <span className="font-bold text-black">MENU</span>
+        </Button>
+      </div>
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex fixed top-5 right-5 gap-3 z-50">
         <Button variant="outline" size="sm" className="bg-white shadow-lg hover:shadow-xl transition-all">
           <Link href="https://t.me/bugecoins" className="flex items-center gap-2">
             <span className="font-bold text-black">TELEGRAM</span>
@@ -146,15 +159,81 @@ export default function BugePage() {
         </Button>
       </div>
 
+      {/* Mobile Navigation Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-[55] md:hidden">
+          <div className="flex flex-col items-center justify-center h-full gap-6 p-4">
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-white shadow-lg w-full max-w-xs"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Link href="https://t.me/bugecoins" className="font-bold text-black text-lg">
+                TELEGRAM
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-white shadow-lg w-full max-w-xs"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Link href="https://x.com/bugecoins" className="font-bold text-black text-lg">
+                X
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-white shadow-lg w-full max-w-xs"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Link href="#" className="font-bold text-black text-lg">
+                CHART
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-white shadow-lg w-full max-w-xs"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Link href="#" className="font-bold text-black text-lg">
+                BUY $BUGE
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="bg-gradient-to-r from-blue-200 via-pink-200 to-purple-200 shadow-lg w-full max-w-xs"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Link href="#" className="font-bold text-black text-lg">
+                APE STORE
+              </Link>
+            </Button>
+            <Button
+              variant="ghost"
+              size="lg"
+              className="text-white text-lg mt-4"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              CLOSE
+            </Button>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative z-10 px-4">
-        <div ref={heroRef} className="flex gap-5 mb-20 relative">
+      <section className="min-h-screen flex flex-col items-center justify-center relative z-10 px-4 pt-16 md:pt-0">
+        <div ref={heroRef} className="flex gap-2 sm:gap-5 mb-10 sm:mb-20 relative">
           {["B", "U", "G", "E"].map((letter, index) => (
             <div
               key={letter}
-              className="text-[200px] md:text-[320px] font-black text-white cursor-pointer transition-all duration-100 select-none"
+              className="text-[80px] sm:text-[120px] md:text-[200px] lg:text-[320px] font-black text-white cursor-pointer transition-all duration-100 select-none"
               style={{
-                WebkitTextStroke: "0.3rem black",
+                WebkitTextStroke: "0.2rem black",
                 WebkitTextFillColor: "white",
                 transform: getLetterTransform(heroRef.current?.children[index] as HTMLElement, index),
                 animation: `subtleTilt${index + 1} ${3.5 + index * 0.3}s ease-in-out infinite`,
@@ -169,9 +248,9 @@ export default function BugePage() {
           ref={dogRef}
           src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/buge.PNG-E2XmW559YUKvdRZs5eoQGYXd9uHg2v.png"
           alt="Buge Dog"
-          width={600}
-          height={850}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-100"
+          width={400}
+          height={600}
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-100 w-[300px] sm:w-[400px] md:w-[500px] lg:w-[600px] h-auto"
           style={{
             transform: `translateX(-50%) ${
               mousePosition.x && dogRef.current
@@ -198,16 +277,16 @@ export default function BugePage() {
       </section>
 
       {/* About Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative z-10 px-4 py-20">
+      <section className="min-h-screen flex flex-col items-center justify-center relative z-10 px-4 py-10 sm:py-20">
         <AnimatedTitle
           text="ABOUT BUGE"
-          className="text-6xl md:text-8xl font-black text-white mb-10 text-center"
-          style={{ WebkitTextStroke: "2px black", WebkitTextFillColor: "white" }}
+          className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 sm:mb-10 text-center"
+          style={{ WebkitTextStroke: "1px sm:2px black", WebkitTextFillColor: "white" }}
         />
 
-        <div className="mb-10">
+        <div className="mb-6 sm:mb-10">
           <div
-            className="w-80 h-80 rounded-3xl shadow-lg bg-cover bg-center animate-pulse"
+            className="w-60 h-60 sm:w-80 sm:h-80 rounded-3xl shadow-lg bg-cover bg-center animate-pulse"
             style={{
               backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20250706_123812_197.PNG-odimhr0VLqZDBm9Q8BvsaLucKfQJmz.png')`,
             }}
@@ -216,8 +295,8 @@ export default function BugePage() {
 
         <WordByWordText
           text="BUGE is a digital pug born on Base Network. He exists to bring back what's been missing—real internet culture with soul. He doesn't make promises. He simply reminds us that a meme, if it hits right, can move people more than any roadmap ever could. He was made for the ones who remember when crypto was fun. When coins felt alive because the people behind them cared. BUGE is for the artists, the internet chads, the ones who stick around when everyone else moves on. Join the journey. Help build the legacy."
-          className="text-xl md:text-2xl text-white max-w-4xl text-center leading-relaxed"
-          style={{ WebkitTextStroke: "1px black", WebkitTextFillColor: "white" }}
+          className="text-lg sm:text-xl md:text-2xl text-white max-w-4xl text-center leading-relaxed px-4"
+          style={{ WebkitTextStroke: "0.5px black", WebkitTextFillColor: "white" }}
         />
       </section>
 
@@ -231,9 +310,9 @@ export default function BugePage() {
           <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/buge3-ugiJofWfgDV9VeLYE6XaL0rAtKRg9A.png"
             alt="Envelope"
-            width={300}
-            height={300}
-            className="transition-all duration-500"
+            width={250}
+            height={250}
+            className="transition-all duration-500 w-[200px] sm:w-[250px] md:w-[300px] h-auto"
           />
         </Button>
       </section>
@@ -241,15 +320,15 @@ export default function BugePage() {
       {/* Note Modal */}
       {noteModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[10000] p-4">
-          <div className="bg-white rounded-xl shadow-2xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto relative">
+          <div className="bg-white rounded-xl shadow-2xl p-4 sm:p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto relative">
             <Button
               variant="ghost"
-              className="absolute top-4 right-4 text-3xl font-bold hover:scale-120 transition-transform text-black"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 text-2xl sm:text-3xl font-bold hover:scale-120 transition-transform text-black"
               onClick={() => setNoteModalOpen(false)}
             >
               ×
             </Button>
-            <div className="mt-8 text-lg leading-relaxed text-black">
+            <div className="mt-8 text-base sm:text-lg leading-relaxed text-black">
               Buge is a meme. It exists because something has been lost in crypto. Something that once felt inevitable.
               We used to hold tokens like they mattered. We used to believe in dumb things that became real things,
               simply because enough of us refused to let them die. We used to make culture, not chase it.
@@ -272,20 +351,20 @@ export default function BugePage() {
       )}
 
       {/* Bugenomics Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative z-10 px-4 py-20">
+      <section className="min-h-screen flex flex-col items-center justify-center relative z-10 px-4 py-10 sm:py-20">
         <AnimatedTitle
           text="BUGENOMICS"
-          className="text-6xl md:text-8xl font-black text-white mb-10 text-center"
-          style={{ WebkitTextStroke: "2px black", WebkitTextFillColor: "white" }}
+          className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 sm:mb-10 text-center"
+          style={{ WebkitTextStroke: "1px sm:2px black", WebkitTextFillColor: "white" }}
         />
 
         <WordByWordText
           text="Buge is on a mission to become the face of internet culture on Base Network. Not a copy. Not a gimmick. A new original. An internet pug for the digital age."
-          className="text-2xl md:text-3xl text-white max-w-3xl text-center mb-12 leading-relaxed"
-          style={{ WebkitTextStroke: "1px black", WebkitTextFillColor: "white" }}
+          className="text-lg sm:text-2xl md:text-3xl text-white max-w-3xl text-center mb-8 sm:mb-12 leading-relaxed px-4"
+          style={{ WebkitTextStroke: "0.5px black", WebkitTextFillColor: "white" }}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 max-w-6xl w-full">
           {[
             {
               title: "NAME",
@@ -310,24 +389,24 @@ export default function BugePage() {
           ].map((card, index) => (
             <div
               key={index}
-              className={`bg-gradient-to-br ${card.bg} rounded-3xl shadow-lg p-6 hover:transform hover:-translate-y-2 hover:rotate-1 hover:scale-105 transition-all duration-200 cursor-pointer`}
+              className={`bg-gradient-to-br ${card.bg} rounded-3xl shadow-lg p-4 sm:p-6 hover:transform hover:-translate-y-2 hover:rotate-1 hover:scale-105 transition-all duration-200 cursor-pointer`}
             >
-              <h3 className="text-2xl font-black text-black mb-4 text-center">{card.title}</h3>
-              <p className="text-lg text-black text-center leading-relaxed">{card.text}</p>
+              <h3 className="text-xl sm:text-2xl font-black text-black mb-3 sm:mb-4 text-center">{card.title}</h3>
+              <p className="text-sm sm:text-lg text-black text-center leading-relaxed">{card.text}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* How to Buy Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative z-10 px-4 py-20">
+      <section className="min-h-screen flex flex-col items-center justify-center relative z-10 px-4 py-10 sm:py-20">
         <AnimatedTitle
           text="HOW TO BUY"
-          className="text-6xl md:text-8xl font-black text-white mb-16 text-center"
-          style={{ WebkitTextStroke: "2px black", WebkitTextFillColor: "white" }}
+          className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-8 sm:mb-16 text-center"
+          style={{ WebkitTextStroke: "1px sm:2px black", WebkitTextFillColor: "white" }}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl w-full">
           {[
             {
               title: "GET A WALLET",
@@ -356,18 +435,18 @@ export default function BugePage() {
               <Image
                 src={step.image || "/placeholder.svg"}
                 alt={step.title}
-                width={300}
-                height={300}
-                className="mb-6 rounded-2xl shadow-lg"
+                width={250}
+                height={250}
+                className="mb-4 sm:mb-6 rounded-2xl shadow-lg w-[200px] sm:w-[250px] md:w-[300px] h-auto"
               />
               <AnimatedTitle
                 text={step.title}
-                className="text-3xl font-black text-white mb-4"
-                style={{ WebkitTextStroke: "1px black", WebkitTextFillColor: "white" }}
+                className="text-2xl sm:text-3xl font-black text-white mb-3 sm:mb-4"
+                style={{ WebkitTextStroke: "0.5px black", WebkitTextFillColor: "white" }}
               />
               <p
-                className="text-xl text-white leading-relaxed"
-                style={{ WebkitTextStroke: "1px black", WebkitTextFillColor: "white" }}
+                className="text-base sm:text-xl text-white leading-relaxed px-2"
+                style={{ WebkitTextStroke: "0.5px black", WebkitTextFillColor: "white" }}
               >
                 {step.text}
               </p>
@@ -377,16 +456,16 @@ export default function BugePage() {
       </section>
 
       {/* Join Section */}
-      <section className="min-h-screen flex items-center justify-center relative z-10 px-4 py-20">
-        <div className="flex flex-col lg:flex-row items-center justify-between max-w-7xl w-full gap-16">
-          <div className="flex-1 flex justify-center">
+      <section className="min-h-screen flex items-center justify-center relative z-10 px-4 py-10 sm:py-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between max-w-7xl w-full gap-8 sm:gap-16">
+          <div className="flex-1 flex justify-center order-2 lg:order-1">
             <Image
               ref={footerImageRef}
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/puge8-q2vHtKwsXZoH75xAsLK28p4OkwH4TC.png"
               alt="Cool Buge with Sunglasses"
-              width={500}
-              height={600}
-              className="transition-all duration-100"
+              width={400}
+              height={500}
+              className="transition-all duration-100 w-[300px] sm:w-[400px] md:w-[500px] h-auto"
               style={{
                 transform:
                   mousePosition.x && footerImageRef.current
@@ -409,22 +488,22 @@ export default function BugePage() {
             />
           </div>
 
-          <div className="flex-1 text-center lg:text-left">
+          <div className="flex-1 text-center lg:text-left order-1 lg:order-2">
             <AnimatedTitle
               text="JOIN THE BUGE ARMY"
-              className="text-6xl md:text-8xl font-black text-white mb-8 leading-tight"
-              style={{ WebkitTextStroke: "2px black", WebkitTextFillColor: "white" }}
+              className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 sm:mb-8 leading-tight"
+              style={{ WebkitTextStroke: "1px sm:2px black", WebkitTextFillColor: "white" }}
             />
 
             <WordByWordText
               text="THE GOODEST BOY IS WAITING FOR YOU ON BASE NETWORK."
-              className="text-3xl md:text-4xl text-white mb-8 leading-relaxed"
-              style={{ WebkitTextStroke: "1px black", WebkitTextFillColor: "white" }}
+              className="text-xl sm:text-3xl md:text-4xl text-white mb-6 sm:mb-8 leading-relaxed px-2"
+              style={{ WebkitTextStroke: "0.5px black", WebkitTextFillColor: "white" }}
             />
 
             <Button
               size="lg"
-              className="bg-white text-black font-black text-2xl px-8 py-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+              className="bg-white text-black font-black text-xl sm:text-2xl px-6 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200 w-full sm:w-auto"
             >
               <Link href="#" className="text-black font-black">
                 JOIN $BUGE
@@ -435,14 +514,14 @@ export default function BugePage() {
       </section>
 
       {/* Copyright */}
-      <section className="py-12 px-4 text-center relative z-10 mb-20">
+      <section className="py-8 sm:py-12 px-4 text-center relative z-10 mb-16 sm:mb-20">
         <div className="max-w-4xl mx-auto">
-          <div className="pt-8">
-            <p className="text-lg text-black mb-2 font-bold">© 2025 BUGE. All Rights Reserved.</p>
+          <div className="pt-6 sm:pt-8">
+            <p className="text-base sm:text-lg text-black mb-2 font-bold">© 2025 BUGE. All Rights Reserved.</p>
             <p className="text-sm text-black mb-4">
               BUGE™ is a registered trademark. Base Network integration and community-driven development.
             </p>
-            <div className="flex flex-wrap justify-center gap-6 text-xs text-black">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs text-black">
               <span>Terms of Service</span>
               <span>•</span>
               <span>Privacy Policy</span>
@@ -456,10 +535,10 @@ export default function BugePage() {
       </section>
 
       {/* Bottom Ribbon */}
-      <div className="fixed bottom-0 left-0 w-full h-16 bg-white z-50 flex items-center overflow-hidden">
-        <div className="flex items-center animate-scroll whitespace-nowrap gap-10">
+      <div className="fixed bottom-0 left-0 w-full h-12 sm:h-16 bg-white z-50 flex items-center overflow-hidden">
+        <div className="flex items-center animate-scroll whitespace-nowrap gap-6 sm:gap-10">
           {Array.from({ length: 10 }, (_, i) => (
-            <div key={i} className="flex items-center gap-10 text-2xl font-black text-black">
+            <div key={i} className="flex items-center gap-6 sm:gap-10 text-lg sm:text-2xl font-black text-black">
               <span>
                 THE GOODEST BOY ON <span className="text-blue-600">BASE!</span>
               </span>
