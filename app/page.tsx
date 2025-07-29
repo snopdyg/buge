@@ -368,22 +368,22 @@ export default function BugePage() {
           {[
             {
               title: "NAME",
-              text: "Four letters. One dog. Zero fucks given. Clean, and impossible to forget. Just like the goodest boy himself.",
+              text: "Four letters. One dog. Zero shits given. Clean, bold, and unforgettable. Just like the goodest boy himself.",
               bg: "from-blue-200 to-blue-300",
             },
             {
               title: "SUPPLY",
-              text: "A trillion. Because why not? Big numbers look cool and nobody wants to deal with tiny decimals.",
+              text: "1 billion. Why not? Big enough to feel legit, small enough to avoid a sea of pointless decimals. Nobody wants to count dust—this is just the right kind of big.",
               bg: "from-green-200 to-green-300",
             },
             {
               title: "LIQUIDITY",
-              text: "Gone. Poof. Vanished into the void. Sent to a dead wallet that nobody can touch. Not us, not you, not anyone.",
+              text: "Backed big and locked deep. Over half the supply lives in the trading pair—and it's staying there. Stored safely on ApeStore, fueling buys and sells with no rug switches or unlock tricks. This dog's got a forever home in the pool.",
               bg: "from-purple-200 to-purple-300",
             },
             {
               title: "TAXES",
-              text: "What taxes? Trade as much as you want. Buy high, sell low, buy again. We don't take a cut. Your money, your problem.",
+              text: "What taxes? Trade whenever you want. Buy high, sell low, repeat chaos. We don't take a cut. Your money, your rules.",
               bg: "from-pink-200 to-pink-300",
             },
           ].map((card, index) => (
