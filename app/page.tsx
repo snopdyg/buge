@@ -308,11 +308,11 @@ export default function BugePage() {
           onClick={() => setNoteModalOpen(true)}
         >
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/buge3-ugiJofWfgDV9VeLYE6XaL0rAtKRg9A.png"
-            alt="Envelope"
-            width={250}
-            height={250}
-            className="transition-all duration-500 w-[200px] sm:w-[250px] md:w-[300px] h-auto"
+            src="/images/next-chapter-envelope.png"
+            alt="Next Chapter Envelope"
+            width={300}
+            height={300}
+            className="transition-all duration-500 w-[250px] sm:w-[300px] md:w-[350px] h-auto"
           />
         </Button>
       </section>
