@@ -288,7 +288,7 @@ export default function BugePage() {
           <div
             className="w-60 h-60 sm:w-80 sm:h-80 rounded-3xl shadow-lg bg-cover bg-center animate-pulse"
             style={{
-              backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_20250706_123812_197.PNG-odimhr0VLqZDBm9Q8BvsaLucKfQJmz.png')`,
+              backgroundImage: `url('/images/about-buge-character.png')`,
             }}
           />
         </div>
