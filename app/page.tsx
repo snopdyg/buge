@@ -40,50 +40,6 @@ export default function BugePage() {
     return "translate(0px, 0px)"
   }
 
-  const WordByWordText = ({ text, className = "" }: { text: string; className?: string }) => {
-    const [visibleWords, setVisibleWords] = useState<number>(0)
-    const textRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            const words = text.split(" ")
-            words.forEach((_, index) => {
-              setTimeout(() => {
-                setVisibleWords(index + 1)
-              }, index * 50)
-            })
-          }
-        },
-        { threshold: 0.3 },
-      )
-
-      if (textRef.current) {
-        observer.observe(textRef.current)
-      }
-
-      return () => observer.disconnect()
-    }, [text])
-
-    const words = text.split(" ")
-
-    return (
-      <div ref={textRef} className={className}>
-        {words.map((word, index) => (
-          <span
-            key={index}
-            className={`inline-block mr-1 transition-all duration-300 ${
-              index < visibleWords ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-            }`}
-          >
-            {word}
-          </span>
-        ))}
-      </div>
-    )
-  }
-
   const AnimatedTitle = ({ text, className = "" }: { text: string; className?: string }) => {
     return (
       <h1 className={className}>
@@ -293,11 +249,16 @@ export default function BugePage() {
           />
         </div>
 
-        <WordByWordText
-          text="BUGE is a digital pug born on Base Network. He exists to bring back what's been missing—real internet culture with soul. He doesn't make promises. He simply reminds us that a meme, if it hits right, can move people more than any roadmap ever could. He was made for the ones who remember when crypto was fun. When coins felt alive because the people behind them cared. BUGE is for the artists, the internet chads, the ones who stick around when everyone else moves on. Join the journey. Help build the legacy."
+        <p
           className="text-lg sm:text-xl md:text-2xl text-white max-w-4xl text-center leading-relaxed px-4"
           style={{ WebkitTextStroke: "0.5px black", WebkitTextFillColor: "white" }}
-        />
+        >
+          BUGE is a digital pug born on Base Network. He exists to bring back what's been missing—real internet culture
+          with soul. He doesn't make promises. He simply reminds us that a meme, if it hits right, can move people more
+          than any roadmap ever could. He was made for the ones who remember when crypto was fun. When coins felt alive
+          because the people behind them cared. BUGE is for the artists, the internet chads, the ones who stick around
+          when everyone else moves on. Join the journey. Help build the legacy.
+        </p>
       </section>
 
       {/* Envelope Section */}
@@ -358,11 +319,13 @@ export default function BugePage() {
           style={{ WebkitTextStroke: "1px sm:2px black", WebkitTextFillColor: "white" }}
         />
 
-        <WordByWordText
-          text="Buge is on a mission to become the face of internet culture on Base Network. Not a copy. Not a gimmick. A new original. An internet pug for the digital age."
+        <p
           className="text-lg sm:text-2xl md:text-3xl text-white max-w-3xl text-center mb-8 sm:mb-12 leading-relaxed px-4"
           style={{ WebkitTextStroke: "0.5px black", WebkitTextFillColor: "white" }}
-        />
+        >
+          Buge is on a mission to become the face of internet culture on Base Network. Not a copy. Not a gimmick. A new
+          original. An internet pug for the digital age.
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 max-w-6xl w-full">
           {[
@@ -495,11 +458,12 @@ export default function BugePage() {
               style={{ WebkitTextStroke: "1px sm:2px black", WebkitTextFillColor: "white" }}
             />
 
-            <WordByWordText
-              text="THE GOODEST BOY IS WAITING FOR YOU ON BASE NETWORK."
+            <p
               className="text-xl sm:text-3xl md:text-4xl text-white mb-6 sm:mb-8 leading-relaxed px-2"
               style={{ WebkitTextStroke: "0.5px black", WebkitTextFillColor: "white" }}
-            />
+            >
+              THE GOODEST BOY IS WAITING FOR YOU ON BASE NETWORK.
+            </p>
 
             <Button
               size="lg"
