@@ -230,6 +230,14 @@ export default function BugePage() {
             }`,
           }}
         />
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30 text-center">
+          <p
+            className="text-lg sm:text-xl md:text-2xl font-black text-white"
+            style={{ WebkitTextStroke: "1px black", WebkitTextFillColor: "white" }}
+          >
+            Contract Address: Coming Soon
+          </p>
+        </div>
       </section>
 
       {/* About Section */}
